@@ -1,3 +1,4 @@
+//weatherReducer.js
 export const initialState = {
     location: { lat: null, lon: null },
     weatherData: null,
