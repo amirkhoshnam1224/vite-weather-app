@@ -1,4 +1,4 @@
-import { weatherReducer, initialState } from '../../reducers/weatherReducer';
+import { weatherReducer, initialState } from '../../hooks/weatherReducer';
 
 describe('weatherReducer', () => {
 
