@@ -21,6 +21,7 @@
     "@testing-library/react": "^16.0.1",
     "@vitejs/plugin-react": "^1.0.0",
     "babel-jest": "^27.0.6",
+    "cypress": "^13.14.2",
     "jest": "^27.0.6",
     "vite": "^2.4.4"
   }
