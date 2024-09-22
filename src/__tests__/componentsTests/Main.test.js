@@ -1,5 +1,11 @@
 import React from 'react';
-import { render, screen, waitFor, fireEvent, act } from '@testing-library/react';
+import {
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+  act,
+} from '@testing-library/react';
 import Main from '../../components/Main';
 import useWeatherData from '../../hooks/useWeatherDate';
 
@@ -63,30 +69,33 @@ test('calls geolocation when current location is selected', async () => {
 });
 
 test('updates city when a different city is selected', async () => {
-    useWeatherData.mockReturnValueOnce({
-      state: {
-        selectedCity: 'current',
-        weatherData: { main: { temp: 20 }, weather: [{ description: 'Clear' }], wind: { speed: 5 } },
-        location: { lat: 52.52, lon: 13.405 },
-        error: null,
+  useWeatherData.mockReturnValueOnce({
+    state: {
+      selectedCity: 'current',
+      weatherData: {
+        main: { temp: 20 },
+        weather: [{ description: 'Clear' }],
+        wind: { speed: 5 },
       },
-      dispatch: mockDispatch,
-      fetchWeatherData: mockFetchWeatherData,
-    });
-  
-    render(<Main />);
-  
-    // صبر کنید تا <select> به درستی رندر شود
-    await waitFor(() => {
-      const select = screen.getByRole('combobox');
-      fireEvent.change(select, { target: { value: 'London' } });
-    });
-  
-    await waitFor(() => {
-      expect(mockDispatch).toHaveBeenCalledWith({
-        type: 'SET_SELECTED_CITY',
-        payload: 'London',
-      });
+      location: { lat: 52.52, lon: 13.405 },
+      error: null,
+    },
+    dispatch: mockDispatch,
+    fetchWeatherData: mockFetchWeatherData,
+  });
+
+  render(<Main />);
+
+  // صبر کنید تا <select> به درستی رندر شود
+  await waitFor(() => {
+    const select = screen.getByRole('combobox');
+    fireEvent.change(select, { target: { value: 'London' } });
+  });
+
+  await waitFor(() => {
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: 'SET_SELECTED_CITY',
+      payload: 'London',
     });
   });
-  
+});

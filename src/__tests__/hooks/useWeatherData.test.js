@@ -12,7 +12,9 @@ const TestComponent = () => {
 
   return (
     <div>
-      <button onClick={() => fetchWeatherData(52.52, 13.405)}>Fetch Weather</button>
+      <button onClick={() => fetchWeatherData(52.52, 13.405)}>
+        Fetch Weather
+      </button>
       {state.error && <p>{state.error}</p>}
       {state.weatherData ? (
         <div>
@@ -32,8 +34,8 @@ test('fetches and displays weather data', async () => {
       name: 'Berlin',
       main: { temp: 20 },
       weather: [{ description: 'Clear sky' }],
-      wind: { speed: 3.5 }
-    }
+      wind: { speed: 3.5 },
+    },
   };
 
   // Mock the axios response
@@ -54,7 +56,7 @@ test('fetches and displays weather data', async () => {
 
 test('displays error message on API failure', async () => {
   const errorMessage = 'Error fetching weather data: Network Error';
-  
+
   // Mock the axios response to reject
   axios.get.mockRejectedValueOnce(new Error('Network Error'));
 
@@ -64,5 +66,7 @@ test('displays error message on API failure', async () => {
   fireEvent.click(screen.getByText(/Fetch Weather/i));
 
   // Wait for the error to appear
-  await waitFor(() => expect(screen.getByText(errorMessage)).toBeInTheDocument());
+  await waitFor(() =>
+    expect(screen.getByText(errorMessage)).toBeInTheDocument(),
+  );
 });

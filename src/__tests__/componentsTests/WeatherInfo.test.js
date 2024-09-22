@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import WeatherInfo from '../../components/WeatherInfo'; 
+import WeatherInfo from '../../components/WeatherInfo';
 
 test('renders loading state when no weather data is provided', () => {
   render(<WeatherInfo weatherData={null} />);
-  
+
   // بررسی می‌کنیم که متن "Loading weather information..." نمایش داده شود
   expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
 });

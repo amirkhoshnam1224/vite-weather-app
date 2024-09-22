@@ -13,9 +13,10 @@ const useGeolocation = () => {
         setLoading(false);
       },
       (err) => {
-        setError(err.message);
+        setError('Unable to retrieve your location. Please select a city manually.');
         setLoading(false);
-      }
+      },
+      { timeout: 10000 } // اضافه کردن timeout برای جلوگیری از انتظار بی‌پایان
     );
   }, []);
 

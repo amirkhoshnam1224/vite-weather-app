@@ -1,14 +1,14 @@
 // store/weatherSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchWeatherDataApi, fetchForecastDataApi } from '../api/weatherApi';
+import { fetchWeatherDataApi } from '../api/weatherApi';
+import { fetchForecastDataApi } from '../api/ForcastApi';
 
-// Thunk برای گرفتن داده‌های پیش‌بینی 5 روز آینده
 export const fetchForecastData = createAsyncThunk(
   'weather/fetchForecastData',
   async ({ lat, lon }) => {
     const response = await fetchForecastDataApi(lat, lon);
     return response;
-  }
+  },
 );
 
 export const fetchWeatherData = createAsyncThunk(
@@ -16,7 +16,7 @@ export const fetchWeatherData = createAsyncThunk(
   async ({ lat, lon }) => {
     const response = await fetchWeatherDataApi(lat, lon);
     return response;
-  }
+  },
 );
 
 const weatherSlice = createSlice({

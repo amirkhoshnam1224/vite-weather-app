@@ -3,12 +3,12 @@ import { render, screen, waitFor, act } from '@testing-library/react';
 import axios from 'axios';
 import DailyForecast from '../../components/DailyForecast';
 
-jest.mock('axios');  // شبیه‌سازی axios
+jest.mock('axios'); // شبیه‌سازی axios
 
 // تست حالت بارگذاری
 test('renders loading state initially', async () => {
   // اینجا می‌خواهیم مطمئن شویم که حالت بارگذاری نمایش داده می‌شود
-  axios.get.mockImplementationOnce(() => new Promise(() => {}));  // درخواست را متوقف می‌کنیم
+  axios.get.mockImplementationOnce(() => new Promise(() => {})); // درخواست را متوقف می‌کنیم
 
   await act(async () => {
     render(<DailyForecast lat={52.52} lon={13.405} />);
@@ -26,7 +26,9 @@ test('renders error message on API failure', async () => {
   });
 
   await waitFor(() => {
-    expect(screen.getByText(/Error fetching daily forecast/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Error fetching daily forecast/i),
+    ).toBeInTheDocument();
   });
 });
 

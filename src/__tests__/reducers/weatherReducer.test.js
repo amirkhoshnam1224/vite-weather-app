@@ -1,11 +1,10 @@
 import { weatherReducer, initialState } from '../../hooks/weatherReducer';
 
 describe('weatherReducer', () => {
-
   it('should set location when SET_LOCATION is dispatched', () => {
     const action = {
       type: 'SET_LOCATION',
-      payload: { lat: 52.52, lon: 13.405 }
+      payload: { lat: 52.52, lon: 13.405 },
     };
 
     const newState = weatherReducer(initialState, action);
@@ -17,7 +16,7 @@ describe('weatherReducer', () => {
   it('should set weather data when SET_WEATHER_DATA is dispatched', () => {
     const action = {
       type: 'SET_WEATHER_DATA',
-      payload: { name: 'Berlin', main: { temp: 20 } }
+      payload: { name: 'Berlin', main: { temp: 20 } },
     };
 
     const newState = weatherReducer(initialState, action);
@@ -29,7 +28,7 @@ describe('weatherReducer', () => {
   it('should set error when SET_ERROR is dispatched', () => {
     const action = {
       type: 'SET_ERROR',
-      payload: 'Error fetching data'
+      payload: 'Error fetching data',
     };
 
     const newState = weatherReducer(initialState, action);
@@ -40,7 +39,7 @@ describe('weatherReducer', () => {
   it('should set selected city when SET_SELECTED_CITY is dispatched', () => {
     const action = {
       type: 'SET_SELECTED_CITY',
-      payload: 'London'
+      payload: 'London',
     };
 
     const newState = weatherReducer(initialState, action);
@@ -55,5 +54,4 @@ describe('weatherReducer', () => {
 
     expect(newState).toEqual(initialState);
   });
-
 });

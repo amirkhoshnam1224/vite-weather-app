@@ -10,7 +10,7 @@ const DailyForecast = ({ forecast }) => {
       <h2>5-Day Weather Forecast</h2>
       <ul>
         {forecast.map((day, index) => (
-          <li key={index} style={{ marginBottom: '10px',display:"flex" }}>
+          <li key={index} style={{ marginBottom: '10px', display: 'flex' }}>
             <h3>{new Date(day.dt * 1000).toLocaleDateString()}</h3>
             <p>Temperature: {day.main.temp}°C</p>
             <p>Condition: {day.weather[0].description}</p>
