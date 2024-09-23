@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import weatherReducer from './weatherSlice'; // مسیر صحیح را بررسی کنید
-
+import weatherReducer from './weatherSlice'; 
 const store = configureStore({
   reducer: {
-    weather: weatherReducer, // باید به درستی تنظیم شده باشد
+    weather: weatherReducer, 
   },
 });
-
 export default store;

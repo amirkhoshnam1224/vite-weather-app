@@ -7,7 +7,7 @@ A fully responsive, React-based weather application that provides current weathe
 - **Current Weather:** Fetches real-time weather information including temperature, humidity, wind speed, and general conditions (e.g., sunny, cloudy).
 - **5-Day Forecast:** Provides a 5-day weather forecast with detailed data for each day, including temperature, condition, and wind speed.
 - **Geolocation Support:** Automatically fetches weather data for the user's current location using browser geolocation.
-- **Manual City Selection:** Allows users to select a city from a predefined list in case geolocation is unavailable or disabled.
+- **Manual City Selection:** Allows users to select a city from a predefined list if geolocation is unavailable.
 - **Weather Icons:** Displays weather-specific icons (e.g., sunny, cloudy, rainy) based on the weather conditions.
 - **Responsive Design:** Fully responsive UI using Tailwind CSS for mobile, tablet, and desktop views.
 - **Error Handling:** Graceful error handling for scenarios where geolocation fails or weather data cannot be retrieved.
@@ -35,5 +35,9 @@ To get a local copy up and running, first clone this repository to your machine:
    cd weather-app 
    npm install
    npm run dev
+
+### Step 2: Running tests
+To run the tests:
+   ```bash
    npm run test
    npm run cy:run

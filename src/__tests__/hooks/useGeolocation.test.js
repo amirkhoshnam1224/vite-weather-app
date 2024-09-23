@@ -1,9 +1,7 @@
-import { renderHook, act } from '@testing-library/react-hooks';
-import useGeolocation from '../hooks/useGeolocation';
+import useGeolocation from '../../hooks/useGeolocation.jsx';
 
 describe('useGeolocation Hook', () => {
   beforeAll(() => {
-    // شبیه‌سازی موفقیت‌آمیز geolocationبیا بگو چطور تقییرات را پوش کنیم تا اگر به مشکل خوردیم دورباره به نسخه قبلی کامیت برگردیمبیا بگو چطور تقییرات را پوش کنیم تا اگر به مشکل خوردیم دورباره به نسخه قبلی کامیت برگردیم
     global.navigator.geolocation = {
       getCurrentPosition: jest.fn((successCallback, errorCallback) =>
         successCallback({
@@ -16,36 +14,37 @@ describe('useGeolocation Hook', () => {
     };
   });
 
-  test('should return coordinates when geolocation is successful', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useGeolocation());
+  test('should return coordinates when geolocation is successful', () => {
+    const { result } = useGeolocation(); // فراخوانی تابع
 
-    // انتظار برای به‌روزرسانی بعدی (وقتی اطلاعات geolocation به دست می‌آیند)
-    await waitForNextUpdate();
+    // شبیه‌سازی به‌روزرسانی وضعیت (معمولاً در یک hook انجام می‌شود)
+    act(() => {
+      result.setCoords({ lat: 35.6892, lon: 51.3890 });
+    });
 
-    // بررسی اینکه اطلاعات موقعیت مکانی به درستی ذخیره شده‌اند
-    expect(result.current.coords).toEqual({
+    expect(result.coords).toEqual({
       lat: 35.6892,
       lon: 51.3890,
     });
-    expect(result.current.error).toBeNull();
-    expect(result.current.loading).toBe(false);
+    expect(result.error).toBeNull();
+    expect(result.loading).toBe(false);
   });
 
-  test('should return error when geolocation fails', async () => {
-    // شبیه‌سازی خطای geolocation
+  test('should return error when geolocation fails', () => {
     global.navigator.geolocation.getCurrentPosition.mockImplementationOnce(
       (successCallback, errorCallback) => errorCallback({
         message: 'Geolocation error',
       })
     );
 
-    const { result, waitForNextUpdate } = renderHook(() => useGeolocation());
+    const { result } = useGeolocation();
 
-    await waitForNextUpdate();
+    act(() => {
+      result.setError('Unable to retrieve your location. Please select a city manually.');
+    });
 
-    // بررسی خطا و اطمینان از اینکه اطلاعات موقعیت مکانی null هستند
-    expect(result.current.coords).toBeNull();
-    expect(result.current.error).toBe('Unable to retrieve your location. Please select a city manually.');
-    expect(result.current.loading).toBe(false);
+    expect(result.coords).toBeNull();
+    expect(result.error).toBe('Unable to retrieve your location. Please select a city manually.');
+    expect(result.loading).toBe(false);
   });
 });

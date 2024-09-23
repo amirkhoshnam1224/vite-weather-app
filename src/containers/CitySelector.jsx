@@ -1,5 +1,5 @@
 import React from 'react';
-import { cities } from '../constants'; 
+import { cities } from '../constants';
 const CitySelector = ({ handleCityChange }) => {
   return (
     <div className="flex flex-col space-y-2 w-full max-w-xs mx-auto font-sans">

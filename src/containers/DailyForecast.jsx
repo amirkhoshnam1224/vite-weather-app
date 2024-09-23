@@ -16,7 +16,7 @@ const getWeatherIcon = (description) => {
 };
 const DailyForecast = ({ forecast }) => {
   if (!forecast || forecast.length === 0) {
-    return <p className="text-center text-gray-500">No forecast data available.</p>; 
+    return <p className="text-center text-gray-500">No forecast data available.</p>;
   }
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto mt-6">

@@ -7,5 +7,4 @@ const WeatherInfo = ({ data }) => {
     </div>
   );
 };
-
 export default WeatherInfo;
