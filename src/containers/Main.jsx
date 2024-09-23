@@ -19,7 +19,7 @@ const Main = () => {
   } = useSelector((state) => state.weather);
   const { coords, error: geoError, loading: geoLoading } = useGeolocation();
 
-  const [selectedCity, setSelectedCity] = useState(null); // ذخیره شهر انتخاب شده
+  const [selectedCity, setSelectedCity] = useState(null);
 
   useEffect(() => {
     if (coords && !selectedCity) {
@@ -28,7 +28,6 @@ const Main = () => {
     }
   }, [dispatch, coords, selectedCity]);
 
-  // تابع تغییر شهر
   const handleCityChange = (event) => {
     const selected = cities.find(city => city.name === event.target.value);
     if (selected) {
@@ -38,7 +37,6 @@ const Main = () => {
     }
   };
 
-  // دکمه دریافت موقعیت مکانی کاربر
   const handleGetLocation = () => {
     if (coords) {
       dispatch(fetchWeatherData(coords));
@@ -49,27 +47,44 @@ const Main = () => {
   };
 
   return (
-    <div>
-      {/* اگر لوکیشن کار نکند، پیام خطا به همراه امکان انتخاب شهر نمایش داده می‌شود */}
+    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-green-500 text-white p-6">
+      {/* پیام خطا و انتخاب شهر */}
       {geoError && (
-        <div>
+        <div className="mb-4">
           <Error message={geoError} />
-          <p>Please select a city manually:</p>
+          <p className="text-lg">Please select a city manually:</p>
         </div>
       )}
 
-      {/* دکمه برای دریافت موقعیت مکانی کاربر */}
-      <div>
-        <button onClick={handleGetLocation}>Get My Location</button>
+      {/* دکمه دریافت موقعیت مکانی کاربر */}
+      <div className="mb-6">
+        <button 
+          onClick={handleGetLocation} 
+          className="bg-blue-700 hover:bg-blue-800 text-white py-2 px-6 rounded-full shadow-lg transition-all duration-300"
+        >
+          Get My Location
+        </button>
       </div>
 
-      {/* همیشه نمایش کامپوننت CitySelector برای انتخاب شهر */}
-      <CitySelector handleCityChange={handleCityChange} />
+      {/* نمایش CitySelector */}
+      <div className="mb-6">
+        <CitySelector handleCityChange={handleCityChange} />
+      </div>
 
       {/* نمایش اطلاعات آب و هوا */}
       {weatherLoading && <Loading />}
-      {data && <WeatherInfo data={data} />}
-      {forecast && <DailyForecast forecast={forecast} />}
+      
+      {data && (
+        <div className="bg-white bg-opacity-20 p-6 rounded-lg shadow-lg mb-6 backdrop-filter backdrop-blur-lg">
+          <WeatherInfo data={data} />
+        </div>
+      )}
+
+      {forecast && (
+        <div className="bg-white bg-opacity-20 p-6 rounded-lg shadow-lg backdrop-filter backdrop-blur-lg">
+          <DailyForecast forecast={forecast} />
+        </div>
+      )}
     </div>
   );
 };

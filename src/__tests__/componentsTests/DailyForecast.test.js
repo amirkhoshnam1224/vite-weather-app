@@ -1,62 +1,33 @@
+jest.mock('.././assets/sunny.svg', () => 'svg-mock');
+jest.mock('.././assets/cloud.svg', () => 'svg-mock');
+jest.mock('.././assets/rainy.svg', () => 'svg-mock');
 import React from 'react';
-import { render, screen, waitFor, act } from '@testing-library/react';
-import axios from 'axios';
-import DailyForecast from '../../components/DailyForecast';
-
-jest.mock('axios'); // شبیه‌سازی axios
-
-// تست حالت بارگذاری
-test('renders loading state initially', async () => {
-  // اینجا می‌خواهیم مطمئن شویم که حالت بارگذاری نمایش داده می‌شود
-  axios.get.mockImplementationOnce(() => new Promise(() => {})); // درخواست را متوقف می‌کنیم
-
-  await act(async () => {
-    render(<DailyForecast lat={52.52} lon={13.405} />);
+import { render, screen } from '@testing-library/react';
+import DailyForecast from '../../containers/DailyForecast';
+describe('DailyForecast Component', () => {
+  test('renders correctly with forecast data', () => {
+    const mockForecast = [
+      {
+        dt: 1627845600,
+        main: { temp: 25, humidity: 60 },
+        weather: [{ description: 'clear sky' }],
+        wind: { speed: 3.5 },
+      },
+      {
+        dt: 1627932000,
+        main: { temp: 28, humidity: 50 },
+        weather: [{ description: 'partly cloudy' }],
+        wind: { speed: 4.2 },
+      },
+    ];
+    render(<DailyForecast forecast={mockForecast} />);
+    expect(screen.getByText('5-Day Weather Forecast')).toBeInTheDocument();
+    expect(screen.getByText(/Temperature: 25°C/)).toBeInTheDocument();
+    expect(screen.getByText(/Condition: clear sky/)).toBeInTheDocument();
+    expect(screen.getByText(/Wind Speed: 3.5 m\/s/)).toBeInTheDocument();
   });
-
-  expect(screen.getByText(/Loading forecast.../i)).toBeInTheDocument();
-});
-
-// تست حالت خطا
-test('renders error message on API failure', async () => {
-  axios.get.mockRejectedValueOnce(new Error('Network Error'));
-
-  await act(async () => {
-    render(<DailyForecast lat={52.52} lon={13.405} />);
-  });
-
-  await waitFor(() => {
-    expect(
-      screen.getByText(/Error fetching daily forecast/i),
-    ).toBeInTheDocument();
-  });
-});
-
-// تست نمایش صحیح داده‌های پیش‌بینی
-test('renders forecast data correctly', async () => {
-  const mockResponse = {
-    data: {
-      list: [
-        {
-          dt: 1633046400,
-          main: { temp: 20, humidity: 60 },
-          weather: [{ description: 'clear sky' }],
-          wind: { speed: 5 },
-        },
-      ],
-    },
-  };
-
-  axios.get.mockResolvedValueOnce(mockResponse);
-
-  await act(async () => {
-    render(<DailyForecast lat={52.52} lon={13.405} />);
-  });
-
-  await waitFor(() => {
-    expect(screen.getByText(/Temperature: 20°C/i)).toBeInTheDocument();
-    expect(screen.getByText(/Condition: clear sky/i)).toBeInTheDocument();
-    expect(screen.getByText(/Humidity: 60%/i)).toBeInTheDocument();
-    expect(screen.getByText(/Wind Speed: 5 m\/s/i)).toBeInTheDocument();
+  test('renders no forecast message when no data is available', () => {
+    render(<DailyForecast forecast={[]} />);
+    expect(screen.getByText('No forecast data available.')).toBeInTheDocument();
   });
 });

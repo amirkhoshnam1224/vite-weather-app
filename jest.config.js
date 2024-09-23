@@ -6,4 +6,7 @@ module.exports = {
   setupFilesAfterEnv: ["@testing-library/jest-dom"],
   moduleFileExtensions: ["js", "jsx"],
   transformIgnorePatterns: ["<rootDir>/node_modules/(?!(axios)/)"],
+  moduleNameMapper: {
+    '\\.svg$': 'identity-obj-proxy', // استفاده از identity-obj-proxy برای مدیریت svg ها
+  },
 };

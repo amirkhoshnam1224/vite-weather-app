@@ -10,12 +10,17 @@ export default ({ mode }) => {
     server: {
       port: 5173,
     },
-
-    build: { target: "es2020", sourcemap: true },
-    optimizeDeps: {
-      esbuildOptions: { target: "es2020", supported: { bigint: true } },
+    build: { 
+      target: "es2020", 
+      sourcemap: true 
     },
-    plugins: [react(), svgr()],
+    optimizeDeps: {
+      esbuildOptions: { 
+        target: "es2020", 
+        supported: { bigint: true } 
+      },
+    },
+    plugins: [react(), svgr()], // اینجا پلاگین‌ها قرار می‌گیرند
     resolve: {
       alias: {
         assets: path.resolve(__dirname, "./src/assets/"),
