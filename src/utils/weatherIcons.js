@@ -1,7 +1,6 @@
 import { ReactComponent as SunnyIcon } from '../assets/sunny.svg';
 import { ReactComponent as CloudyIcon } from '../assets/cloud.svg';
 import { ReactComponent as RainyIcon } from '../assets/rainy.svg';
-
 export const getWeatherIcon = (description) => {
   switch (description) {
     case 'clear sky':

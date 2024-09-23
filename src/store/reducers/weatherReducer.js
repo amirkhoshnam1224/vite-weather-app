@@ -4,7 +4,6 @@ const initialState = {
   error: null,
   selectedCity: 'current',
 };
-
 export default function weatherReducer(state = initialState, action) {
   switch (action.type) {
     case 'SET_LOCATION':

@@ -2,7 +2,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchWeatherDataApi } from '../api/weatherApi';
 import { fetchForecastDataApi } from '../api/ForcastApi';
-
 export const fetchForecastData = createAsyncThunk(
   'weather/fetchForecastData',
   async ({ lat, lon }) => {
@@ -10,7 +9,6 @@ export const fetchForecastData = createAsyncThunk(
     return response;
   },
 );
-
 export const fetchWeatherData = createAsyncThunk(
   'weather/fetchWeatherData',
   async ({ lat, lon }) => {
@@ -18,7 +16,6 @@ export const fetchWeatherData = createAsyncThunk(
     return response;
   },
 );
-
 const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
@@ -56,5 +53,4 @@ const weatherSlice = createSlice({
       });
   },
 });
-
 export default weatherSlice.reducer;

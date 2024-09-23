@@ -1,0 +1,41 @@
+[33mcommit a9efd12d24e10687ab3aef15c61d84f6dab1cdfa[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: amirkhoshnam1224 <amir.khoshnam1224@gmail.com>
+Date:   Mon Sep 23 14:19:50 2024 +0330
+
+    hooks test
+
+[33mcommit 6d5d984a272f1b2e831a7559bbac08fde1d64886[m
+Author: amirkhoshnam1224 <amir.khoshnam1224@gmail.com>
+Date:   Sun Sep 22 03:32:33 2024 +0330
+
+    add prettier and airbnb
+
+[33mcommit d81be482cdac5ce86150daa9fbfeaf840a77a852[m
+Author: amirkhoshnam1224 <amir.khoshnam1224@gmail.com>
+Date:   Sun Sep 22 02:18:45 2024 +0330
+
+    add redux
+
+[33mcommit c0eea8d46ebd05e5421f1fed324ba2a7ae5f4eab[m
+Author: amirkhoshnam1224 <amir.khoshnam1224@gmail.com>
+Date:   Sat Sep 21 21:33:13 2024 +0330
+
+    refactor
+
+[33mcommit 8aba51939e88418b033f271c7e6ddf242d78b868[m
+Author: amirkhoshnam1224 <amir.khoshnam1224@gmail.com>
+Date:   Sat Sep 21 16:00:47 2024 +0330
+
+    unit test and refactored landing
+
+[33mcommit 2c5e8b6df5d8d540335bb55e0bf9418d7989d265[m
+Author: amirkhoshnam1224 <amir.khoshnam1224@gmail.com>
+Date:   Fri Sep 20 23:21:15 2024 +0330
+
+    added unit tests useWeatherData&weatherReducer
+
+[33mcommit 4634a6a7a4af99aa46851054490d726ad7e40e8e[m
+Author: amirkhoshnam1224 <amir.khoshnam1224@gmail.com>
+Date:   Fri Sep 20 22:41:13 2024 +0330
+
+    Completed components and unit tests
