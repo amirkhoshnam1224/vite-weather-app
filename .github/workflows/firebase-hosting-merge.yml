@@ -9,15 +9,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12'
+          node-version: '20'
       - run: npm ci
       - run: npm run build
-      - name: GitHub Action for Firebase
-        uses: w9jds/firebase-action@v1.5.0
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_VITE_WEATHER_APP_7D14E }}
+          channelId: live
+          projectId: vite-weather-app-7d14e
