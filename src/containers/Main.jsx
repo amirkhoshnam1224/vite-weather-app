@@ -15,7 +15,7 @@ const Main = () => {
   useEffect(() => {
     if (data) {
       console.log('Sending weather data:', data); // چاپ داده‌ها
-      window.parent.postMessage({ type: 'WEATHER_DATA', payload: data }, 'http://127.0.0.1:5500');
+      window.parent.postMessage({ type: 'WEATHER_DATA', payload: data }, 'https://landing-f92f9.web.app/');
     }
   }, [data]);
   const { coords, error: geoError, loading: geoLoading } = useGeolocation();
