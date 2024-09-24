@@ -1,6 +1,14 @@
 import React from 'react';
-
 const Footer = () => {
+  const technologies = [
+    'React.js with Redux Toolkit',
+    'Tailwind CSS for styling',
+    'OpenWeatherMap API for weather data',
+    'Vite.js for fast development',
+    'React Testing Library',
+    'Jest and Cypress for testing',
+    'Airbnb ESLint configuration',
+  ];
   return (
     <footer className="bg-gray-800 text-white py-6 ">
       <div className="container mx-auto text-center">
@@ -17,17 +25,12 @@ const Footer = () => {
         </p>
         <p className="text-sm mt-4">Technologies used in this project:</p>
         <ul className="list-none text-sm space-y-1">
-        <li>React.js with Redux Toolkit</li>
-          <li>Tailwind CSS for styling</li>
-          <li>OpenWeatherMap API for weather data</li>
-          <li>Vite.js for fast development</li>
-          <li>React Testing Library</li>
-          <li>Jest and Cypress for testing</li>
-          <li>Airbnb ESLint configuration</li>
+          {technologies.map((tech, index) => (
+            <li key={index}>{tech}</li>
+          ))}
         </ul>
       </div>
     </footer>
   );
 };
-
 export default Footer;

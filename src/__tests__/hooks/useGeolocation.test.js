@@ -1,50 +1,59 @@
+import React from 'react';
+import { render, act } from '@testing-library/react';
 import useGeolocation from '../../hooks/useGeolocation.jsx';
 
-describe('useGeolocation Hook', () => {
-  beforeAll(() => {
-    global.navigator.geolocation = {
-      getCurrentPosition: jest.fn((successCallback, errorCallback) =>
-        successCallback({
-          coords: {
-            latitude: 35.6892,
-            longitude: 51.3890,
-          },
-        })
-      ),
+const TestComponent = () => {
+  const { coords, error, loading } = useGeolocation();
+  return (
+    <div>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {coords && (
+        <p>
+          Latitude: {coords.lat}, Longitude: {coords.lon}
+        </p>
+      )}
+    </div>
+  );
+};
+
+describe('useGeolocation', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  it('should set coordinates when geolocation is successful', () => {
+    const mockGeolocation = {
+      getCurrentPosition: jest.fn((success) => {
+        success({ coords: { latitude: 12.34, longitude: 56.78 } });
+      }),
     };
-  });
+    global.navigator.geolocation = mockGeolocation;
 
-  test('should return coordinates when geolocation is successful', () => {
-    const { result } = useGeolocation(); // فراخوانی تابع
-
-    // شبیه‌سازی به‌روزرسانی وضعیت (معمولاً در یک hook انجام می‌شود)
-    act(() => {
-      result.setCoords({ lat: 35.6892, lon: 51.3890 });
-    });
-
-    expect(result.coords).toEqual({
-      lat: 35.6892,
-      lon: 51.3890,
-    });
-    expect(result.error).toBeNull();
-    expect(result.loading).toBe(false);
-  });
-
-  test('should return error when geolocation fails', () => {
-    global.navigator.geolocation.getCurrentPosition.mockImplementationOnce(
-      (successCallback, errorCallback) => errorCallback({
-        message: 'Geolocation error',
-      })
-    );
-
-    const { result } = useGeolocation();
+    const { getByText } = render(<TestComponent />);
 
     act(() => {
-      result.setError('Unable to retrieve your location. Please select a city manually.');
+      jest.runAllTimers();
     });
 
-    expect(result.coords).toBeNull();
-    expect(result.error).toBe('Unable to retrieve your location. Please select a city manually.');
-    expect(result.loading).toBe(false);
+    expect(getByText(/latitude: 12.34/i)).toBeInTheDocument();
+    expect(getByText(/longitude: 56.78/i)).toBeInTheDocument();
+  });
+
+  it('should set error when geolocation fails', () => {
+    const mockGeolocation = {
+      getCurrentPosition: jest.fn((success, error) => {
+        error(new Error('Geolocation error'));
+      }),
+    };
+    global.navigator.geolocation = mockGeolocation;
+
+    const { getByText } = render(<TestComponent />);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(getByText(/unable to retrieve your location/i)).toBeInTheDocument();
   });
 });

@@ -1,17 +1,25 @@
-# Weather App
+# Weather app
 
 A fully responsive, React-based weather application that provides current weather information and a 5-day weather forecast using the OpenWeather API. This app allows users to retrieve weather details for their current location via geolocation or manually select a city from a predefined list of cities. The application is designed with modern UI/UX principles using Tailwind CSS and offers a smooth, intuitive experience.
 
 ## Features
 
-- **Current Weather:** Fetches real-time weather information including temperature, humidity, wind speed, and general conditions (e.g., sunny, cloudy).
+- **Current Weather:** Fetches real-time weather information including temperature, humidity, wind speed, and general conditions ( sunny, cloudy).
+
 - **5-Day Forecast:** Provides a 5-day weather forecast with detailed data for each day, including temperature, condition, and wind speed.
+
 - **Geolocation Support:** Automatically fetches weather data for the user's current location using browser geolocation.
+
 - **Manual City Selection:** Allows users to select a city from a predefined list if geolocation is unavailable.
-- **Weather Icons:** Displays weather-specific icons (e.g., sunny, cloudy, rainy) based on the weather conditions.
+
+- **Weather Icons:** Displays weather-specific icons ( sunny, cloudy, rainy) based on the weather conditions.
+
 - **Responsive Design:** Fully responsive UI using Tailwind CSS for mobile, tablet, and desktop views.
+
 - **Error Handling:** Graceful error handling for scenarios where geolocation fails or weather data cannot be retrieved.
+
 - **Testing:** Comprehensive unit and integration tests with Jest and Cypress to ensure the app’s functionality.
+
 - **Built-in Loader:** Displays a loading animation while fetching data from the API.
 
 ## Technologies Used
@@ -36,8 +44,17 @@ To get a local copy up and running, first clone this repository to your machine:
    npm install
    npm run dev
 
-### Step 2: Running tests
+#### Step 2: tests run
 To run the tests:
    ```bash
    npm run test
    npm run cy:run
+
+
+"Important: Please launch the Weather App while connected to a VPN"
+                                                              
+"If you are unable to obtain your location, please use the Microsoft Edge browser"
+
+repositori React-app:https://github.com/amirkhoshnam1224/vite-weather-app
+
+repositori LandingPage:https://github.com/amirkhoshnam1224/LandingPage-WeatherApp

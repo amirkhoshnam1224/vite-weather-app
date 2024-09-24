@@ -1,4 +1,7 @@
+// src/__tests__/store/weatherSlice.test.js
 import weatherReducer, { fetchWeatherData, fetchForecastData } from '../../store/weatherSlice';
+import axiosInstance from '../../api/axiosInstance'; 
+jest.mock('../utils/axiosInstance');
 describe('weatherSlice', () => {
   const initialState = {
     data: null,
@@ -15,13 +18,16 @@ describe('weatherSlice', () => {
     expect(state.loading).toBe(true);
     expect(state.error).toBeNull();
   });
-  test('should handle fetchWeatherData fulfilled', () => {
-    const action = fetchWeatherData.fulfilled({ temperature: 20 }, '', { lat: 0, lon: 0 });
+  test('should handle fetchWeatherData fulfilled', async () => {
+    const mockResponse = { temperature: 20 };
+    axiosInstance.get.mockResolvedValueOnce({ data: mockResponse }); // Mock پاسخ axios
+
+    const action = await fetchWeatherData.fulfilled(mockResponse, '', { lat: 0, lon: 0 });
     const state = weatherReducer(initialState, action);
     expect(state.loading).toBe(false);
-    expect(state.data).toEqual({ temperature: 20 });
+    expect(state.data).toEqual(mockResponse);
   });
-  test('should handle fetchWeatherData rejected', () => {
+  test('should handle fetchWeatherData rejected', async () => {
     const action = fetchWeatherData.rejected({ message: 'Error' });
     const state = weatherReducer(initialState, action);
     expect(state.loading).toBe(false);
@@ -33,13 +39,16 @@ describe('weatherSlice', () => {
     expect(state.loading).toBe(true);
     expect(state.error).toBeNull();
   });
-  test('should handle fetchForecastData fulfilled', () => {
-    const action = fetchForecastData.fulfilled({ forecast: [] }, '', { lat: 0, lon: 0 });
+  test('should handle fetchForecastData fulfilled', async () => {
+    const mockResponse = { forecast: [] };
+    axiosInstance.get.mockResolvedValueOnce({ data: mockResponse }); // Mock پاسخ axios
+
+    const action = await fetchForecastData.fulfilled(mockResponse, '', { lat: 0, lon: 0 });
     const state = weatherReducer(initialState, action);
     expect(state.loading).toBe(false);
-    expect(state.forecast).toEqual({ forecast: [] });
+    expect(state.forecast).toEqual(mockResponse);
   });
-  test('should handle fetchForecastData rejected', () => {
+  test('should handle fetchForecastData rejected', async () => {
     const action = fetchForecastData.rejected({ message: 'Error' });
     const state = weatherReducer(initialState, action);
     expect(state.loading).toBe(false);

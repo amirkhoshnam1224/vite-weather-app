@@ -12,12 +12,6 @@ const Main = () => {
   const dispatch = useDispatch();
   const {data,forecast,loading: weatherLoading,error: weatherError,
   } = useSelector((state) => state.weather);
-  useEffect(() => {
-    if (data) {
-      console.log('Sending weather data:', data); // چاپ داده‌ها
-      window.parent.postMessage({ type: 'WEATHER_DATA', payload: data }, 'https://landing-f92f9.web.app/');
-    }
-  }, [data]);
   const { coords, error: geoError, loading: geoLoading } = useGeolocation();
   const [selectedCity, setSelectedCity] = useState(null);
   useEffect(() => {

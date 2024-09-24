@@ -4,6 +4,11 @@ const useGeolocation = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    if (!navigator || !navigator.geolocation) {
+      setError('Geolocation is not supported by this browser.');
+      setLoading(false);
+      return;
+    }
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;

@@ -1,9 +1,11 @@
 import axios from 'axios';
+
 const axiosInstance = axios.create({
-  baseURL: 'https://api.openweathermap.org/data/2.5/',
+  baseURL: import.meta.env.VITE_OPENWEATHER_BASE_URL,
   params: {
-    appid: '222d90b4a36a08f635c2aff827c12d51',
+    appid: import.meta.env.VITE_OPENWEATHER_API_KEY,
     units: 'metric',
   },
 });
+
 export default axiosInstance;

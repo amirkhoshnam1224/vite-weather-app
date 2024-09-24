@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', 'sans-serif'], // اضافه کردن فونت جدید
+        sans: ['Roboto', 'sans-serif'], 
       },
     },
   },
