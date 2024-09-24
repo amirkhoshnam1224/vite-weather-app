@@ -1,4 +1,4 @@
-import axiosInstance from '../utils/axiosInstance';
+import axiosInstance from './axiosInstance';
 export const fetchWeatherDataApi = async (lat, lon) => {
   const response = await axiosInstance.get('weather', {
     params: {
@@ -6,6 +6,5 @@ export const fetchWeatherDataApi = async (lat, lon) => {
       lon,
     },
   });
-  console.log('Api:', response.data);
   return response.data;
 };
